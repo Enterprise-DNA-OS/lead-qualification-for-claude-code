@@ -1,3 +1,7 @@
+---
+description: "Recalculate the register with the active policy, preserving inputs and explanations for every decision."
+---
+
 # score
 
 Recalculate the register with the active policy, preserving inputs and explanations for every decision. Optional --contact limits the run.

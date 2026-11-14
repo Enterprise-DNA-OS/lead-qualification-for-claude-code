@@ -1,3 +1,7 @@
+---
+description: "Read detail first."
+---
+
 # update-contact
 
 Read detail first. Record corrections, ownership, lawful purpose evidence and review dates supplied by the operator. Then re-score. Never infer evidence from a high vendor score.

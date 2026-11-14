@@ -1,3 +1,7 @@
+---
+description: "Read operator-labelled changes and their reasons."
+---
+
 # audit
 
 Read operator-labelled changes and their reasons. Actor labels are not authenticated identities.

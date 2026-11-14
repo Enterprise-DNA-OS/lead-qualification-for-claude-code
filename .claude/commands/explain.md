@@ -1,3 +1,7 @@
+---
+description: "Explain the fit points, activity window and holds from the saved inputs."
+---
+
 # explain
 
 Explain the fit points, activity window and holds from the saved inputs.

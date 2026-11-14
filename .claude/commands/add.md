@@ -1,3 +1,7 @@
+---
+description: "Register an authorised enquiry."
+---
+
 # add
 
 Register an authorised enquiry. Missing review evidence keeps it on hold.

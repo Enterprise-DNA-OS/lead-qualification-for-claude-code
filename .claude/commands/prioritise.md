@@ -1,3 +1,7 @@
+---
+description: "Prepare the daily qualification queue."
+---
+
 # prioritise
 
 Prepare the daily qualification queue. Only current, eligible priority records appear. A score is not permission to contact.

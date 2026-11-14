@@ -1,3 +1,7 @@
+---
+description: "Review activity outside the active policy window."
+---
+
 # stale-signals
 
 Review activity outside the active policy window. Do not invent replacement observations.

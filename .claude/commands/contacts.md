@@ -1,3 +1,7 @@
+---
+description: "Review the contact register and ownership."
+---
+
 # contacts
 
 Review the contact register and ownership.

@@ -1,3 +1,7 @@
+---
+description: "Add the actual review note after reading detail."
+---
+
 # log
 
 Add the actual review note after reading detail.

@@ -1,3 +1,7 @@
+---
+description: "Read docs/replace-madkudu.md."
+---
+
 # import
 
 Read docs/replace-madkudu.md. Map the actual export headers. Dry-run first, reconcile counts, then repeat without --dry-run. Preserve source files privately.

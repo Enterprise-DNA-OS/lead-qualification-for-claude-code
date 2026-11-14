@@ -7,3 +7,5 @@ The tests exercise import preview, duplicate batches, source revisions, whole-fi
 The repository workflow runs Node 20 and 22 on Windows and Linux, plus PostgreSQL 16 on Linux. All five jobs passed for commit 3a30edb: https://github.com/Enterprise-DNA-OS/lead-qualification-for-claude-code/actions/runs/43647738273.
 
 The demo contains five seeded fictional contacts and one additional synthetic import. The branded review and decision record were inspected in a headless browser. The review was narrowed to six columns so it fits a desktop page. Its actual prioritise, compliance and stale-signals outputs were captured for the comparison page. No customer records or fabricated terminal output were used.
+
+Final implementation commit a9b5a51 passed all five jobs: https://github.com/Enterprise-DNA-OS/lead-qualification-for-claude-code/actions/runs/43647920685. The comparison page rendered successfully at desktop and mobile widths with noindex,nofollow, six tracked booking links and no horizontal page overflow. The page source was pushed; the public URL still returned 404 during the deployment check.

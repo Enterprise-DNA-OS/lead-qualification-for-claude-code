@@ -1,3 +1,7 @@
+---
+description: "Record an opt-out or local hold immediately."
+---
+
 # suppress
 
 Record an opt-out or local hold immediately. It excludes the contact from handovers without waiting for another score.

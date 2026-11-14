@@ -1,3 +1,7 @@
+---
+description: "Check purpose evidence, accuracy and retention reviews, suppression and ownership."
+---
+
 # compliance
 
 Check purpose evidence, accuracy and retention reviews, suppression and ownership. Read docs/compliance.md. Never call this legal certification.

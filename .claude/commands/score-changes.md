@@ -1,3 +1,7 @@
+---
+description: "Compare the last two local decisions."
+---
+
 # score-changes
 
 Compare the last two local decisions. Highlight model changes before interpreting a delta.

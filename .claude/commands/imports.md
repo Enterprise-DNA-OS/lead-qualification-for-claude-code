@@ -1,3 +1,7 @@
+---
+description: "Reconcile loaded batches against the source counts."
+---
+
 # imports
 
 Reconcile loaded batches against the source counts.

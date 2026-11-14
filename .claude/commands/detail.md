@@ -1,3 +1,7 @@
+---
+description: "Read the record, source history, notes and observations before changing it."
+---
+
 # detail
 
 Read the record, source history, notes and observations before changing it.

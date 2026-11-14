@@ -1,3 +1,7 @@
+---
+description: "Write a complete private JSON archive, including raw imports and history."
+---
+
 # export
 
 Write a complete private JSON archive, including raw imports and history. Never overwrite an existing archive or put it in a public repo.

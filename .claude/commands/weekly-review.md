@@ -1,3 +1,7 @@
+---
+description: "Run prioritise, attention and compliance, then source-freshness and outcomes."
+---
+
 # weekly-review
 
 Run prioritise, attention and compliance, then source-freshness and outcomes. Explain owners, decisions and missing evidence in one Monday review.

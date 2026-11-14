@@ -1,3 +1,7 @@
+---
+description: "Copy fixtures/policy.json into a private policy file and edit the documented fields."
+---
+
 # model-add
 
 Copy fixtures/policy.json into a private policy file and edit the documented fields. Create a new named version. No trained vendor model transfers.

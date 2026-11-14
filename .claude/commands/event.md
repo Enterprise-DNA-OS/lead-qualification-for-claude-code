@@ -1,3 +1,7 @@
+---
+description: "Record an observed event with a unique source key."
+---
+
 # event
 
 Record an observed event with a unique source key. Kinds: demo_requested, trial_started, pricing_viewed, active_day, meeting_held. Then re-score.

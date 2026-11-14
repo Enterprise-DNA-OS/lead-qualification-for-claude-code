@@ -1,3 +1,7 @@
+---
+description: "Read the command list."
+---
+
 # help
 
 Read the command list.
