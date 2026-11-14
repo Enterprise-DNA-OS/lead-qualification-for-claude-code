@@ -1,0 +1,12 @@
+{
+  "industries": ["software", "professional services"],
+  "countries": ["NZ", "AU"],
+  "employees_min": 10,
+  "employees_max": 200,
+  "fit_points": {"industry": 40, "country": 25, "employees": 35},
+  "event_points": {"demo_requested": 60, "trial_started": 30, "pricing_viewed": 15, "active_day": 5, "meeting_held": 40},
+  "lookback_days": 30,
+  "accuracy_days": 90,
+  "fit_weight": 0.5,
+  "priority_threshold": 60
+}

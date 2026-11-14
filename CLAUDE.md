@@ -1,43 +1,51 @@
-# Lead Qualification for Claude Code: operating instructions
+# Lead Qualification for Claude Code
 
-This file is the brain. Claude Code reads it at the start of every session. It says who this is for, how work gets done, and the one right way to do each recurring job.
+## Purpose
 
-## Who this is for
+An operator-run qualification desk for authorised business enquiries. Set the business name in brand.json. Demo contacts and activity are fictional. Read the CLI before answering any record question.
 
-- **Business:** [YOUR BUSINESS]
-- **Operator:** [YOUR NAME], [your role]
-- **What matters most:** [the one or two outcomes you care about]
+## Rules
 
-Fill this in once. A worker with context knows. A worker without it guesses.
+Use scripts/qualify.mjs for business writes. Never send, buy data, run an enrichment service or enrol anyone in a sequence. A score does not establish consent or permission to contact. Never invent purpose evidence, observed activity, accuracy reviews or retention dates. Every write records an actor label, not a verified identity. Show ambiguous candidates and stop until the operator identifies the record.
 
-## How to work
+Imported source records and local scores have different meanings and scales. Never describe local weighted points as vendor predictions or probabilities. Re-score after changing inputs or models. Read docs/compliance.md before interpreting a hold.
 
-1. **Take a brief, not a script.** The operator describes the outcome. You run the right command and present the answer.
-2. **Read before you write.** Before drafting anything about a record, read its full history first.
-3. **Plain language.** Short sentences. No filler. Numbers in tables.
-4. **Silent success, loud problems.** No play-by-play. Say what broke and what you did about it.
-5. **Stop at the line.** Anything that sends, deletes, or faces a customer waits for a yes in this session.
+## Routes
 
-## Routing table: one right way for each recurring job
+- /help: npm run qualify -- help
+- /contacts: npm run qualify -- contacts
+- /detail: npm run qualify -- detail --contact="<email or name>"
+- /models: npm run qualify -- models
+- /scores: npm run qualify -- scores
+- /explain: npm run qualify -- explain --contact="<email or name>"
+- /prioritise: npm run qualify -- prioritise
+- /attention: npm run qualify -- attention
+- /stale-signals: npm run qualify -- stale-signals
+- /score-changes: npm run qualify -- score-changes
+- /source-freshness: npm run qualify -- source-freshness
+- /outcomes: npm run qualify -- outcomes
+- /compliance: npm run qualify -- compliance
+- /imports: npm run qualify -- imports
+- /audit: npm run qualify -- audit
+- /weekly-review: npm run qualify -- weekly-review
+- /add: npm run qualify -- add --email="<email>" --name="<name>" --company="<business>" --actor="<operator>"
+- /update-contact: npm run qualify -- update-contact --contact="<email>" --owner="<owner>" --purpose="<purpose>" --purpose-evidence="<reference>" --accuracy-checked-at="<ISO timestamp>" --retain-until="<YYYY-MM-DD>" --reason="<reason>" --actor="<operator>"
+- /event: npm run qualify -- event --contact="<email>" --kind=demo_requested --at="<ISO timestamp>" --key="<source event ID>" --evidence="<reference>" --actor="<operator>"
+- /log: npm run qualify -- log --contact="<email>" --body="<review note>" --actor="<operator>"
+- /suppress: npm run qualify -- suppress --contact="<email>" --reason="<reason>" --actor="<operator>"
+- /model-add: npm run qualify -- model-add --file="<policy file>" --name="<version name>" --actor="<operator>"
+- /model-activate: npm run qualify -- model-activate --model="<version name>" --reason="<reason>" --actor="<operator>"
+- /score: npm run qualify -- score --actor="<operator>"
+- /import: npm run qualify -- import madkudu --file="<CSV>" --source="<source label>" --exported-at="<ISO timestamp>" --actor="<operator>" --dry-run
+- /export: npm run qualify -- export --file="exports/qualification-backup.json"
+- /draft-handover: npm run qualify -- draft-handover --actor="<operator>"
+- /docs: npm run docs. Qualification records and policy review papers.
+- /view: npm run view. Read-only review dashboard.
+- /customise: tested migration and CLI change; preserve historical policies and decisions.
+- /new-view: read-only query and report, verified on demo data.
 
-| When the operator asks for... | Use this |
-|---|---|
-| <!-- TODO(author): one row per slash command --> | `/...` |
+## Storage
 
-If an ask fits nothing here, run the CLI directly (`npm run <cli> -- --help`) and then propose a new command for it.
+DATABASE_URL selects PostgreSQL. Otherwise DATA_DIR selects the PGlite directory, default .data/db. OUTPUT_DIR redirects reports and drafts. Never seed a working database. Read docs/operations.md for private imports, backups and restore checks. A database owner can bypass the CLI; this base is for trusted operators and is not a multi-user authorisation service.
 
-## Hard rules
-
-- Never send email or messages from here. Draft to `drafts/`, a person sends.
-- Never delete records without an explicit yes in this session. Prefer marking closed or archived.
-- Never invent a record. If a name is ambiguous, list the candidates and ask.
-- The database is the source of truth. If the answer is not in it, say so.
-
-## Where things live
-
-- `scripts/` the CLI. `scripts/lib/db.mjs` picks `DATABASE_URL` (Postgres, Supabase) or the embedded database in `.data/`.
-- `supabase/migrations/` the schema, plain SQL. `npm run migrate` applies it.
-- `.claude/commands/` the slash commands. Add one every time the same ask comes twice.
-- `docs/` the thesis and the guide for moving off MadKudu.
-
-Built by Enterprise DNA. Installed and run for you as part of Omni: https://enterprisedna.co/omni/instead-of/madkudu
+Built and run through Omni by Enterprise DNA.

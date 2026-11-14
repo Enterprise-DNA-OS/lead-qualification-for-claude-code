@@ -1,11 +1,14 @@
 [
-  {
-    "name": "example",
-    "title": "TODO(author): the first document this industry must produce",
-    "for_each": "select gen_random_uuid() as id, 'Example' as name",
-    "file": "name",
-    "sections": [
-      { "title": "Details", "sql": "select 'replace me' as item, $1::text as record_id" }
-    ]
-  }
+ {"name":"qualification-record","title":"Qualification decision record","for_each":"select id,name from contacts order by name","file":"name","sections":[
+  {"title":"Contact and review evidence","layout":"record","sql":"select name,email,company,owner,purpose,purpose_evidence,accuracy_checked_at,retain_until,suppressed,outcome from contacts where id=$1"},
+  {"title":"Local score history","note":"Historical assessments. Re-score and use prioritise to check current eligibility.","sql":"select m.name model,s.fit,s.engagement,s.total,s.segment,s.blockers,s.as_of from score_runs s join models m on m.id=s.model_id where contact_id=$1 order by s.created_at desc"},
+  {"title":"Recorded activity","sql":"select kind,occurred_at,evidence,actor from events where contact_id=$1 order by occurred_at"},
+  {"title":"Imported vendor history","note":"Vendor and local numeric scales differ. These numbers are preserved, not treated as probabilities or equivalent scores.","sql":"select b.source,b.exported_at,v.fit_score,v.fit_segment,v.engagement_score,v.engagement_segment from vendor_scores v join import_batches b on b.id=v.batch_id where v.contact_id=$1 order by b.exported_at desc"},
+  {"title":"Operator notes","sql":"select body,actor,created_at from notes where contact_id=$1 order by created_at"}
+ ]},
+ {"name":"model-review","title":"Qualification policy review","for_each":"select id,name from models order by name","file":"name","sections":[
+  {"title":"Version and weights","layout":"record","sql":"select name,active,policy,created_at from models where id=$1"},
+  {"title":"Recent decisions","sql":"select c.name,s.total,s.segment,s.as_of from score_runs s join contacts c on c.id=s.contact_id where s.model_id=$1 order by s.created_at desc limit 50"},
+  {"title":"Policy decisions","sql":"select action,actor,detail,created_at from audit_log where entity_id=$1 order by created_at"}
+ ]}
 ]

@@ -1,115 +1,113 @@
-<h1 align="center">Lead Qualification for Claude Code</h1>
+# Lead Qualification for Claude Code
 
-<p align="center">
-  <strong>The open-source lead qualification desk that is just a database and Claude Code.</strong>
-</p>
+Own the rules that decide which enquiry deserves attention. Keep contact facts, observed activity, imported MadKudu scores and your own qualification decisions together.
 
-<p align="center">
-  Created by <a href="https://www.enterprisedna.co"><strong>Enterprise DNA</strong></a>. Free and open source. Works with Claude Code, Codex, OpenCode or Cursor.
-</p>
+## Three ways to use it
 
-<!-- three-doors -->
-<table align="center">
-  <tr>
-    <td align="center"><strong>Do it yourself</strong><br/>Clone it, run it, own it. Free, MIT.<br/><a href="#quick-start">Quick start</a></td>
-    <td align="center"><strong>We customise it</strong><br/>Your fields, your rules, your MadKudu data brought across.<br/><a href="https://enterprisedna.co/omni/book/?utm_source=github&utm_medium=readme&utm_campaign=madkudu">Book a call</a></td>
-    <td align="center"><strong>We run it for you</strong><br/>Installed, connected and operated inside Omni. Setup fee, then a retainer.<br/><a href="https://enterprisedna.co/omni/instead-of/madkudu?utm_source=github&utm_medium=readme&utm_campaign=madkudu">How it works</a></td>
-  </tr>
-</table>
+- **Do it yourself:** free MIT source. Run locally with Claude Code, Codex, OpenCode or Cursor.
+- **We customise it:** Enterprise DNA maps your MadKudu history, adds your qualification rules and connects your systems. One setup fee, then a retainer.
+- **We run it for you:** installed, connected and operated through **Omni by Enterprise DNA**. One setup fee, then a retainer. [Talk to Sam](https://enterprisedna.co/omni/book?offer=replace-software&utm_campaign=madkudu&utm_medium=readme).
 
-<p align="center">
-  <a href="#what-is-this">What is this</a> &bull;
-  <a href="#why-no-front-end">Why no front end</a> &bull;
-  <a href="#quick-start">Quick start</a> &bull;
-  <a href="#the-commands">Commands</a> &bull;
-  <a href="#instead-of-madkudu">Instead of MadKudu</a> &bull;
-  <a href="#want-it-installed-and-run-for-you">Installed for you</a> &bull;
-  <a href="#license">License</a>
-</p>
+## Start with synthetic records
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Node-20+-339933?style=flat-square" alt="Node 20+" />
-  <img src="https://img.shields.io/badge/PostgreSQL-any-336791?style=flat-square" alt="PostgreSQL" />
-  <img src="https://img.shields.io/badge/PGlite-embedded-3ecf8e?style=flat-square" alt="PGlite" />
-  <img src="https://img.shields.io/badge/License-MIT-yellow?style=flat-square" alt="MIT License" />
-</p>
-
----
-
-## What is this
-
-Lead Qualification for Claude Code does the job you pay MadKudu for, as a Postgres database and a set of agent commands. There is no web front end. You open the folder in [Claude Code](https://claude.com/claude-code) (or Codex, OpenCode, Cursor: see `AGENTS.md`) and ask for what you want in plain language. It runs the right query, and it can answer questions the MadKudu dashboard cannot.
-
-<!-- TODO(author): the annual bill. One sentence: what a 10 to 50 person business typically pays MadKudu per year, all in, with a source. -->
-
-Want the same thing with a web front end, or built on a different stack? That is a customisation, and it is exactly what Enterprise DNA does: [book a call](https://enterprisedna.co/omni/book/?utm_source=github&utm_medium=readme&utm_campaign=madkudu).
-
-<!-- TODO(author): two or three sentences on what this specific product covers and who it is for. -->
-
-## Why no front end
-
-- The front end was only ever there because the database was hard to talk to. That is no longer true.
-- Your data sits in plain Postgres tables you own. Any tool can read them. No export, no lock-in.
-- No seats, no tiers, no add-ons. Read [docs/why-no-front-end.md](docs/why-no-front-end.md) for the honest trade-offs too.
-
-## Quick start
-
-Sixty seconds, no database install (an embedded Postgres runs inside Node):
+Node 20 or newer. PGlite runs locally without a server; DATABASE_URL selects PostgreSQL.
 
 ```bash
-git clone https://github.com/Enterprise-DNA-OS/lead-qualification-for-claude-code.git
-cd lead-qualification-for-claude-code
 npm install
 npm run demo
+npm run qualify -- prioritise
+npm run qualify -- attention
+npm run qualify -- explain --contact=rae@harbour.example
+npm run qualify -- weekly-review --json
+npm run view
+npm run docs
+npm test
 ```
 
-Then open the folder in Claude Code and type a slash command. <!-- TODO(author): name the first command to try. -->
+The demo seeds five fictional contacts, including an old trial, missing purpose evidence, an expired retention review and a suppressed enquiry. Use an empty database. Repeated seeding makes no changes. This is an operator-run qualification desk with explicit rules, not a trained predictive model or a proprietary contact database.
 
-### Use it with your own Postgres or Supabase
+## The week
 
-Copy `.env.example` to `.env`, set `DATABASE_URL`, then `npm run migrate`. Same commands, shared data, no per-seat fee.
+Use /prioritise for the daily handover, /stale-signals for activity that has aged out, /score-changes after a policy review, /compliance for missing evidence and /weekly-review for the Monday meeting. /log records a review; /draft-handover writes locally and never sends.
 
-## The commands
+Fit points come from industry, country and employee range. Engagement points come from documented events inside the policy's lookback window. Each component is capped at 100, then combined using fit_weight. The demo threshold is 60, its activity window is 30 days and accuracy review is 90 days. These are editable operating policies, not legal deadlines or calibrated conversion probabilities. Won, lost, disqualified and suppressed contacts stay out of the handover. Missing purpose, ownership, accuracy or retention evidence also puts a contact on hold.
 
-<!-- TODO(author): a table of the slash commands in .claude/commands and what each one does. -->
+Each score saves its policy, contact inputs, events and reasons. Old scores remain inspectable. A changed contact, newly recorded event, different active model or score older than one day requires re-scoring before handover. Imported vendor scores are historical reference points on a different scale.
 
-| Command | What it does |
-|---|---|
-| `/...` | ... |
+## Bring your records across
 
-## Instead of MadKudu
-
-<!-- TODO(author): how to bring data across from MadKudu; link docs/replace-madkudu.md -->
-
-## Architecture
-
-```
-lead-qualification-for-claude-code/
-  CLAUDE.md                 how the operator wants this run (routing table + house rules)
-  AGENTS.md                 the same, for Codex / OpenCode / Cursor / Gemini CLI
-  .claude/commands/         the slash commands
-  scripts/                  the CLI the commands drive
-  scripts/lib/db.mjs        one adapter: DATABASE_URL (pg) or embedded PGlite
-  supabase/migrations/      plain SQL schema
-  supabase/seed.sql         demo data
-  docs/                     the thesis and the migration guide
+```bash
+npm run qualify -- import madkudu --file=fixtures/madkudu.csv --source=synthetic-salesforce --exported-at=2026-11-13T00:00:00Z --actor="Demo operator" --dry-run
 ```
 
-## Built for coding agents
+Repeat without --dry-run after reviewing the output. The fixture is synthetic and follows documented CRM field names; it is not a downloaded customer export. The importer supports contact score exports, preserves all source columns and never overwrites locally reviewed contact fields. Bulk Scorer exports need their actual headers checked and mapped. Account-only domain lists, trained models and licensed enrichment do not transfer. [Switch guide](docs/replace-madkudu.md).
 
-The database, CLI and command recipes work with Claude Code, Codex, OpenCode or Cursor. Ask your coding agent for a new command and have it implement and test the change against the same records.
+## Ten questions the desk answers
 
-## Contributing
+1. Which high-scoring enquiries still lack a recorded purpose? compliance
+2. Which contacts are eligible for today's handover? prioritise
+3. Why did this contact receive these points? explain
+4. Which old trial signals have stopped contributing? stale-signals
+5. Which local scores changed after the last review? score-changes
+6. Which sources have not been refreshed? source-freshness
+7. Which imported vendor scores preceded our own decision? detail
+8. Which saved scores became stale when records changed? attention
+9. How do recorded outcomes differ by latest segment? outcomes
+10. Who activated the policy and what reason did they record? audit
 
-Issues and pull requests are welcome. Keep the shape: plain SQL, a small CLI, a slash command per recurring job, no front end.
+These questions work today. They combine your local evidence with imported history; they are not an unsupported claim that MadKudu cannot report similar facts.
 
-## Want it installed and run for you?
+## Commands
 
-Enterprise DNA installs Lead Qualification for Claude Code for your business, migrates your MadKudu data, connects it to the rest of your tools, and runs it for you as part of **Omni**, our managed Command Center. One setup fee, then a monthly retainer.
+- /help: Read the command list.
+- /contacts: Review the contact register and ownership.
+- /detail: Read the record, source history, notes and observations before changing it.
+- /models: Read every policy version and which one is active.
+- /scores: Read historical scores. These are snapshots; use prioritise for current eligibility.
+- /explain: Explain the fit points, activity window and holds from the saved inputs.
+- /prioritise: Prepare the daily qualification queue. Only current, eligible priority records appear. A score is not permission to contact.
+- /attention: Review missing evidence, ownership, retention, stale scores and changed inputs.
+- /stale-signals: Review activity outside the active policy window. Do not invent replacement observations.
+- /score-changes: Compare the last two local decisions. Highlight model changes before interpreting a delta.
+- /source-freshness: Review the latest export date per source. Seven days is a demo operating rule. An empty result means no export has been loaded.
+- /outcomes: Review recorded open, won, lost and disqualified outcomes by latest segment. Counts are descriptive, not proof that scoring caused a sale.
+- /compliance: Check purpose evidence, accuracy and retention reviews, suppression and ownership. Read docs/compliance.md. Never call this legal certification.
+- /imports: Reconcile loaded batches against the source counts.
+- /audit: Read operator-labelled changes and their reasons. Actor labels are not authenticated identities.
+- /weekly-review: Run prioritise, attention and compliance, then source-freshness and outcomes. Explain owners, decisions and missing evidence in one Monday review.
+- /add: Register an authorised enquiry. Missing review evidence keeps it on hold.
+- /update-contact: Read detail first. Record corrections, ownership, lawful purpose evidence and review dates supplied by the operator. Then re-score. Never infer evidence from a high vendor score.
+- /event: Record an observed event with a unique source key. Kinds: demo_requested, trial_started, pricing_viewed, active_day, meeting_held. Then re-score.
+- /log: Add the actual review note after reading detail.
+- /suppress: Record an opt-out or local hold immediately. It excludes the contact from handovers without waiting for another score.
+- /model-add: Copy fixtures/policy.json into a private policy file and edit the documented fields. Create a new named version. No trained vendor model transfers.
+- /model-activate: Read the proposed policy and explain changed weights and thresholds. Activate the authorised version, then score all contacts. Activation invalidates old handovers.
+- /score: Recalculate the register with the active policy, preserving inputs and explanations for every decision. Optional --contact limits the run.
+- /import: Read docs/replace-madkudu.md. Map the actual export headers. Dry-run first, reconcile counts, then repeat without --dry-run. Preserve source files privately.
+- /export: Write a complete private JSON archive, including raw imports and history. Never overwrite an existing archive or put it in a public repo.
+- /draft-handover: Re-score first and review prioritise. Write an internal handover in drafts. Never send, enrol contacts in sequences or infer contact permission.
 
-- Book a call: [enterprisedna.co/omni/book](https://enterprisedna.co/omni/book/?offer=replace-software&utm_source=github&utm_medium=readme&utm_campaign=madkudu)
-- Read more: [enterprisedna.co/omni/instead-of/madkudu](https://enterprisedna.co/omni/instead-of/madkudu?utm_source=github&utm_medium=readme&utm_campaign=madkudu)
+Every CLI command supports --json. All writes require --actor, a supplied label rather than an authenticated identity. Partial IDs and case-insensitive names work; ambiguous matches list candidates and exit 1. The recipes contain the required flags. Use /customise and /new-view for tested changes.
 
-## License
+## Documents in your brand
 
-MIT. Copyright (c) 2026 Enterprise DNA.
+Edit brand.json. npm run docs renders qualification decision records and model review papers. npm run view renders historical score summaries, current attention, recorded outcomes and source freshness. Outputs are read-only HTML with no server or user interface to maintain. [Why no front end](docs/why-no-front-end.md).
+
+## Your first hour: ten things to ask for
+
+1. Put our business name on the decision record.
+2. Show today's eligible enquiries.
+3. Explain why the old trial contributes no points.
+4. Show the missing purpose evidence.
+5. Preview our exported contact scores.
+6. Compare imported history with our latest assessment.
+7. Record an observed demo request.
+8. Draft the internal handover.
+9. Create a new version of our scoring policy.
+10. Add our product line using /customise.
+
+## Scope and operation
+
+This desk operates on authorised first-party records supplied by an operator. It does not discover contacts, buy enrichment, identify anonymous visitors, sync a CRM, train statistical models or send messages. Enterprise DNA can scope connections and screens for your version. Keep the vendor service if you need its proprietary data or predictive models unchanged. [Operations](docs/operations.md), [compliance checks](docs/compliance.md), [research](docs/research.md).
+
+MIT. Not affiliated with MadKudu, HG Insights or Anthropic. Agent subscriptions, hosting and operation remain your costs.

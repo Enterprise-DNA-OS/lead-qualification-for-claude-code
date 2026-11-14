@@ -1,0 +1,3 @@
+Id,Name,Email,Company,Industry,Country,NumberOfEmployees,MK_Customer_Fit_Score__c,MK_Customer_Fit_Segment__c,MK_Likelihood_to_Buy_Score__c,MK_Likelihood_to_Buy_Segment__c,MK_Customer_Fit_Signals__c,Extra source detail
+SYNTH-001,Rae Taylor,rae@harbour.example,Harbour Systems,software,NZ,35,82,very good,71,high,"Requested demo, known business",synthetic example
+SYNTH-002,New Enquiry,new@coast.example,Coast Systems,software,AU,18,70,good,42,medium,"Business fit\nNeeds review",not a real vendor specimen
