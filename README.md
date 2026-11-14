@@ -24,7 +24,7 @@ npm run docs
 npm test
 ```
 
-The demo seeds five fictional contacts, including an old trial, missing purpose evidence, an expired retention review and a suppressed enquiry. Use an empty database. Repeated seeding makes no changes. This is an operator-run qualification desk with explicit rules, not a trained predictive model or a proprietary contact database.
+The demo seeds five fictional contacts and imports one more synthetic enquiry, including an old trial, missing purpose evidence, an expired retention review and a suppressed enquiry. Use an empty database. Repeated seeding makes no changes. This is an operator-run qualification desk with explicit rules, not a trained predictive model or a proprietary contact database.
 
 ## The week
 

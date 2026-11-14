@@ -1,8 +1,27 @@
 [
- {"name":"qualification-week","title":"Qualification review","subtitle":"Historical scores and current record checks. Run prioritise for a fresh handover list.","sections":[
-  {"title":"Latest score records","sql":"select name,company,fit,engagement,total,segment,suppressed,outcome,as_of from latest_scores order by total desc"},
-  {"title":"Current attention","note":"The accuracy warning here uses the demo 90-day review policy; compliance uses the active model policy.","sql":"select name,company,owner,reason from qualification_attention order by name,reason"},
-  {"title":"Observed outcomes","note":"Descriptive counts, not a causal measure of model performance.","sql":"select * from qualification_outcomes order by segment,outcome"},
-  {"title":"Source exports","sql":"select * from source_freshness order by source"}
- ]}
+  {
+    "name": "qualification-week",
+    "title": "Qualification review",
+    "subtitle": "Historical scores and current record checks. Run prioritise for a fresh handover list.",
+    "sections": [
+      {
+        "title": "Latest score records",
+        "sql": "select name,company,fit,engagement,total,segment from latest_scores order by total desc"
+      },
+      {
+        "title": "Current attention",
+        "note": "The accuracy warning here uses the demo 90-day review policy; compliance uses the active model policy.",
+        "sql": "select name,company,owner,reason from qualification_attention order by name,reason"
+      },
+      {
+        "title": "Observed outcomes",
+        "note": "Descriptive counts, not a causal measure of model performance.",
+        "sql": "select * from qualification_outcomes order by segment,outcome"
+      },
+      {
+        "title": "Source exports",
+        "sql": "select * from source_freshness order by source"
+      }
+    ]
+  }
 ]
